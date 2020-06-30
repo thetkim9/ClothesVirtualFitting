@@ -95,7 +95,7 @@ Rect detectAndDisplay(Mat frame)
 
         crop = frame(roi_b);
         resize(crop, res, Size(128, 128), 0, 0, INTER_LINEAR); // This will be needed later while saving images
-        cvtColor(crop, gray, CV_BGR2GRAY); // Convert cropped image to Grayscale
+        cvtColor(crop, gray, COLOR_BGR2GRAY); // Convert cropped image to Grayscale
 
         // // Form a filename
         // filename = "";
@@ -112,5 +112,5 @@ Rect detectAndDisplay(Mat frame)
         return faces[ic];
     }
     printf("there is no clear face\n");
-    return Rect(); 
+    return Rect();
 }

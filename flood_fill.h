@@ -1,8 +1,8 @@
 #include "canny.h"
 
 
-#define SCALE_X 0.4 
-#define SCALE_Y 0.4 
+#define SCALE_X 0.4
+#define SCALE_Y 0.4
 
 // take an RGB image  of body or TShirt and return a binsry image of filled
 Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 255 )
@@ -22,28 +22,28 @@ Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 2
 
   // if(start_point.x == 0 && start_point.y == 0){
   //   start_point = Point(m/2,n/2);
-  //   printf("m = %d n =%d \n",m , n );     
+  //   printf("m = %d n =%d \n",m , n );
   // }
 
   medianBlur(_src, ss, 1);
   edged =  call_canny(70 , ss );
-   
+
 
   // to binary
   ///////////////
   Mat im_gray;
-  cvtColor(edged,im_gray,CV_RGB2GRAY);
+  cvtColor(edged,im_gray,COLOR_RGB2GRAY);
   Mat img_bw = im_gray > 40;
   imshow("binary" , img_bw);
  /////////////////////////////////////////////
- 
+
   Mat mask = img_bw.clone();
   copyMakeBorder(mask, mask, 1, 1, 1, 1, cv::BORDER_REPLICATE);
-  
+
   imshow("mask" , mask);
   /////////////////
 
-  //Closed 
+  //Closed
    Mat element = getStructuringElement( morph_elem, Size( 2*morph_size + 1, 2*morph_size+1 ), Point( morph_size, morph_size ) );
 
   Mat closed;
@@ -52,11 +52,11 @@ Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 2
   imshow("closed" , closed);
 
 /////////////////////////////////////////
-  // fill = fill_in_edges_white(closed , 255  ); 
+  // fill = fill_in_edges_white(closed , 255  );
 
   fill = closed.clone();
   floodFill(closed, Point(0,0), 255 );
-  imshow("filed" , fill); 
+  imshow("filed" , fill);
 
 ///////////////////////////////////////
 return fill;

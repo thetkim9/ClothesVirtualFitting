@@ -43,13 +43,13 @@ Mat CannyThreshold(int, void* , Mat src , Mat src_gray , Mat dst)
   src.copyTo( dst, detected_edges);
   Size s = detected_edges.size();
   // printf("detected_edges height = %d --- width = %d\n lowThreshold = %d\n ",s.height,s.width,lowThreshold);
-  
+
   // if(lowThreshold >70 )
   //   REP(i,s.height)
   //     REP(j,s.width)
   //       if(detected_edges.at<int>(i,j) < 0)
   //         detected_edges.at<int>(i,j) = 0;
-  
+
 
   // if(lowThreshold > 99){
   //   REP(i,s.height){
@@ -81,7 +81,7 @@ Mat call_canny(int _th , Mat _src )
   dst.create( src.size(), src.type() );
 
   /// Convert the image to grayscale
-  cvtColor( src, src_gray, CV_BGR2GRAY );
+  cvtColor( src, src_gray, COLOR_BGR2GRAY );
 
   /// Create a window
   // namedWindow( window_name, CV_WINDOW_AUTOSIZE );
@@ -89,12 +89,12 @@ Mat call_canny(int _th , Mat _src )
   /// Create a Trackbar for user to enter threshold
   //createTrackbar( "Min Threshold:", window_name, &lowThreshold, max_lowThreshold, CannyThreshold );
   lowThreshold = _th;
-  
+
   /// Show the image
   Mat ret  =   CannyThreshold(0, 0 ,src  , src_gray , dst);
 
   Mat im_gray;
-  cvtColor(ret,im_gray,CV_RGB2GRAY);
+  cvtColor(ret,im_gray,COLOR_RGB2GRAY);
   Mat img_bw = im_gray > 40;
 
 
@@ -103,4 +103,3 @@ Mat call_canny(int _th , Mat _src )
 
   return img_bw;
 }
-

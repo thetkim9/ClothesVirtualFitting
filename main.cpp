@@ -7,7 +7,7 @@
 
 int main(int argc, char** argv)
 {
-  
+
   //argv[1] main image
   //argv[2] teshert
 
@@ -24,7 +24,7 @@ int main(int argc, char** argv)
 
   src_image = imread(argv[2]);
   main_img = resize_tshirt(src_image);
-  shirt = main_img.clone(); 
+  shirt = main_img.clone();
   imshow("shirt" , main_img);
 
   edge = call_canny(80,shirt);
@@ -39,13 +39,13 @@ int main(int argc, char** argv)
   // Point pt2((face.x + face.height), (face.y + face.width));
   // rectangle(body, pt1, pt2, Scalar(0, 255, 0), 2, 8, 0);
   // imshow ("face", body);
-  
+
   printf("ggg\n");
   Mat im_gray;
-  cvtColor(shirt,im_gray,CV_RGB2GRAY);
+  cvtColor(shirt,im_gray,COLOR_RGB2GRAY);
 
   imshow("shirt gray" , im_gray);
-  
+
   Mat shirt_bw = im_gray > 180;
   imshow(" shirt binary" , shirt_bw);
   printf("mid %d %d\n", mid_width_body,mid_width_shirt);
@@ -55,4 +55,3 @@ int main(int argc, char** argv)
 
   waitKey(0);
 }
-
