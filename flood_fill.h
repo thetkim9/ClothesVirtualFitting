@@ -8,7 +8,7 @@
 Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 255 )
 {
    printf("px %d  py%d\n", start_point.x ,start_point.y);
-  imshow("src",src_image);
+  //imshow("src",src_image);
   int morph_elem = 2;
   int morph_size = 10;
 
@@ -34,13 +34,13 @@ Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 2
   Mat im_gray;
   cvtColor(edged,im_gray,COLOR_RGB2GRAY);
   Mat img_bw = im_gray > 40;
-  imshow("binary" , img_bw);
+  //imshow("binary" , img_bw);
  /////////////////////////////////////////////
 
   Mat mask = img_bw.clone();
   copyMakeBorder(mask, mask, 1, 1, 1, 1, cv::BORDER_REPLICATE);
 
-  imshow("mask" , mask);
+  //imshow("mask" , mask);
   /////////////////
 
   //Closed
@@ -49,14 +49,14 @@ Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 2
   Mat closed;
   morphologyEx( img_bw, closed, MORPH_CLOSE, element );
 
-  imshow("closed" , closed);
+  //imshow("closed" , closed);
 
 /////////////////////////////////////////
   // fill = fill_in_edges_white(closed , 255  );
 
   fill = closed.clone();
   floodFill(closed, Point(0,0), 255 );
-  imshow("filed" , fill);
+  //imshow("filed" , fill);
 
 ///////////////////////////////////////
 return fill;

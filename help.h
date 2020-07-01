@@ -66,6 +66,6 @@ int mid_body(Mat src , char* pic_name){
     im.at<uchart>(j,mid) = 250;
   }
 
-  imshow(pic_name, im);
+  //imshow(pic_name, im);
   return mid;
-} 
+}

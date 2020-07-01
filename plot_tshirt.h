@@ -41,7 +41,7 @@ REP(i,bh){
   }
 }
 
- imshow("right part" , ans);
+ //imshow("right part" , ans);
 
 h_it_s = start_heigth_shirt;
 h_it_b =start_heigth_body;
@@ -69,8 +69,8 @@ REP(i,bh){
   }
 }
 
- imshow("left part" , ans);
+ //imshow("left part" , ans);
  // imwrite("left part" , ans);
- imwrite("images/right part.jpg" , ans);
+ imwrite("images/result.jpg" , ans);
  return ans;
 }

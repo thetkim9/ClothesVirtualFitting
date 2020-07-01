@@ -1,7 +1,3 @@
-FROM ufoym/deepo:tensorflow
-
-CMD ["bash"]
-
 RUN apt-get update
 RUN apt-get -y install curl gnupg
 RUN mkdir /workspace
@@ -22,3 +18,22 @@ RUN pip3 install flask Flask-Limiter
 COPY . .
 EXPOSE 80
 ENTRYPOINT python src/app.py
+
+FROM cpp-build-base:0.1.0 AS build
+
+WORKDIR /src
+
+COPY CMakeLists.txt main.cpp ./
+
+RUN cmake . && make
+
+FROM ubuntu:bionic
+
+WORKDIR /opt/hello-world
+
+COPY --from=build /src/helloworld ./
+
+EXPOSE 80
+ENTRYPOINT python src/app.py
+
+CMD ["./helloworld"]
