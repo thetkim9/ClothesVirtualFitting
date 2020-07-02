@@ -1,4 +1,4 @@
-from flask import Flask, request, send_file
+from flask import Flask, render_template, request, send_file
 from flask_limiter import Limiter
 from PIL import Image, ImageOps
 import PIL
@@ -6,7 +6,7 @@ from ga import track_event
 from subprocess import Popen, PIPE
 import os
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder="./")
 app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 8
 
 limiter = Limiter(app, default_limits=['1 per second'])
@@ -15,25 +15,28 @@ limiter = Limiter(app, default_limits=['1 per second'])
 def index():
     return render_template('index.html')
 
-@app.route('/fit', methods=['POST'])
+@app.route('/fit', methods=['GET', 'POST'])
 def fit():
+  if request.method != "POST":
+    return
+
   track_event(category='ClothesFit', action='fit')
 
   if not request.files.get('person_image'):
-    return {'error': 'must have a person image'}, 300
+    return {'error': 'must have a person image'}, 400
 
   if not request.files.get('shirt_image'):
-    return {'error': 'must have a shirt image'}, 300
+    return {'error': 'must have a shirt image'}, 400
 
   try:
     print("hi0")
     person_image = Image.open(request.files['person_image'].stream)
     shirt_image = Image.open(request.files['shirt_image'].stream)
     if(person_image.format not in ['JPG', 'JPEG', 'PNG']):
-      return {'error': 'image must be jpg, jpeg or png'}, 500
+      return {'error': 'image must be jpg, jpeg or png'}, 400
 
     if(shirt_image.format not in ['JPG', 'JPEG', 'PNG']):
-      return {'error': 'image must be jpg, jpeg or png'}, 500
+      return {'error': 'image must be jpg, jpeg or png'}, 400
 
     #print("hi1", person_image, shirt_image)
     dir1 = "images/person."+person_image.format.lower()
@@ -55,7 +58,7 @@ def fit():
     msg, err = p.communicate()
 
     if msg!=None and len(msg)>0:
-        return {'error': 'face not properly recognized. choose a photo with an upfront person.'}, 600
+        return {'error': 'face not properly recognized. choose a photo with an upfront person.'}, 400
 
     #print("hi5.5")
     result = send_file("./images/final.jpg", mimetype='image/jpg')
@@ -64,7 +67,7 @@ def fit():
     return result
 
   except Exception:
-    return {'error': 'can not load your image files. check your image files'}, 800
+    return {'error': 'can not load your image files. check your image files'}, 400
 
 @app.errorhandler(413)
 def request_entity_too_large(error):

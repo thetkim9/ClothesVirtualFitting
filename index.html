@@ -40,8 +40,8 @@
                         var source = document.getElementById('source').files[0]
                         var target = document.getElementById('target').files[0]
 
-                        formData.append('source', source)
-                        formData.append('target', target)
+                        formData.append('person_image', source)
+                        formData.append('shirt_image', target)
 
                         fetch(
                             '/fit',
@@ -55,6 +55,7 @@
                                 return response
                             }
                             else{
+                                document.body.innerHTML += response.statusText
                                 throw Error("fit error")
 
                             }
