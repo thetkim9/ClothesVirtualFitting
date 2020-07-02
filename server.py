@@ -11,6 +11,10 @@ app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 8
 
 limiter = Limiter(app, default_limits=['1 per second'])
 
+@app.route("/")
+def index():
+    return render_template('index.html')
+
 @app.route('/fit', methods=['POST'])
 def fit():
   track_event(category='ClothesFit', action='fit')

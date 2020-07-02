@@ -1,0 +1,52 @@
+openapi: 3.0.1
+info:
+  title: Ainized-ClothesVirtualFitting
+  description:  |
+    ## Fit a T-shirt on your body
+    ---
+    How to use:
+      * Pick a person image
+      * Pick a t-shirt image
+      * Excute and wait until the result shows up
+
+  version: 1.0.0
+  license:
+    name: "AhmedKamal1432 & comcom"
+servers:
+  - url: "https://beginning-thetkim9.endpoint.ainize.ai/"
+
+paths:
+  /fit:
+    post:
+      tags:
+      - ClothesVirtualFitting
+      requestBody:
+        required: true
+        description: "fit t-shirt image on a person image"
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                base_image:
+                  type: string
+                  format: binary
+                style_image:
+                  type: string
+                  format: binary
+
+            encoding:
+              files:
+                contentType: image/*
+      responses:
+         '200':
+            description: success
+            content:
+              images/*:
+                  schema:
+                    type: string
+                    format: binary
+         '400':
+            description: Bad request (Can not load images)
+         '500':
+            description: Server Side Error
