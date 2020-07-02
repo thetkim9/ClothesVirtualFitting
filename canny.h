@@ -21,7 +21,7 @@ int lowThreshold;
 int const max_lowThreshold = 100;
 int ratio = 3;
 int kernel_size = 3;
-char* window_name = "Edge Map";
+char* window_name = (char*)"Edge Map";
 
 /**
  * @function CannyThreshold
@@ -72,7 +72,7 @@ Mat call_canny(int _th , Mat _src )
   src = _src.clone() ;
   Size s = _src.size();
   int n = s.width, m=s.height;
-  printf(" n ,m %d %d\n",n,m );
+  //printf(" n ,m %d %d\n",n,m );
 
   if( !src.data )
   { return Mat::zeros(0, 0, CV_32F);; }

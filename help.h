@@ -44,7 +44,7 @@ Mat resize_tshirt(Mat src_image){
 int mid_body(Mat src , char* pic_name){
   Size s = src.size();
   int n = s.width, m=s.height;
-  printf(" n ,m %d %d\n",n,m );
+  //printf(" n ,m %d %d\n",n,m );
   Mat im = src.clone();
   int mid = 0, tc = 0;
   REP(j,m){

@@ -3,7 +3,7 @@ Mat plot_tshirt(int mid_width_body,int mid_width_shirt,
                 Mat body , Mat shirt,
                 Mat shirt_bw ){
 
-  printf("start of ploting\n");
+  //printf("start of ploting\n");
 
   Size s = shirt.size();
   int sh = s.height;  int sw = s.width;
@@ -15,9 +15,9 @@ Mat plot_tshirt(int mid_width_body,int mid_width_shirt,
  int h_it_s = start_heigth_shirt;
  int h_it_b =start_heigth_body;
 
- printf("second of ploting\n");
+ //printf("second of ploting\n");
 
-printf(" mid  width in two %d %d ",mid_width_body , mid_width_shirt);
+//printf(" mid  width in two %d %d ",mid_width_body , mid_width_shirt);
  //  while(h_it_s < sh && shirt_bw.at<uchar>(h_it_s,mid_width_shirt) < 100){
  //    printf("in\n");
  //    int w_it_s = mid_width_shirt;
@@ -58,7 +58,7 @@ h_it_b =start_heigth_body;
 
  //   h_it_b++; h_it_s++;
  // }
- printf("end of ploting\n");
+ //printf("end of ploting\n");
 
 REP(i,bh){
   REP(j,bw/2){
@@ -70,7 +70,7 @@ REP(i,bh){
 }
 
  //imshow("left part" , ans);
- // imwrite("left part" , ans);
- imwrite("images/result.jpg" , ans);
+ //imwrite("left part" , ans);
+ imwrite("images/final.jpg" , ans);
  return ans;
 }

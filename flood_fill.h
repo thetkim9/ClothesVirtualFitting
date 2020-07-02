@@ -7,7 +7,7 @@
 // take an RGB image  of body or TShirt and return a binsry image of filled
 Mat call_floodFill(Mat src_image ,Point start_point = Point(0,0) ,int  color = 255 )
 {
-   printf("px %d  py%d\n", start_point.x ,start_point.y);
+   //printf("px %d  py%d\n", start_point.x ,start_point.y);
   //imshow("src",src_image);
   int morph_elem = 2;
   int morph_size = 10;
