@@ -18,8 +18,6 @@ servers:
 paths:
   /fit:
     post:
-      tags:
-      - ClothesVirtualFitting
       requestBody:
         required: true
         description: "fit t-shirt image on a person image"
@@ -28,10 +26,10 @@ paths:
             schema:
               type: object
               properties:
-                base_image:
+                person_image:
                   type: string
                   format: binary
-                style_image:
+                shirt_image:
                   type: string
                   format: binary
 
