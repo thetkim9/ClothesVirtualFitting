@@ -71,6 +71,6 @@ REP(i,bh){
 
  //imshow("left part" , ans);
  //imwrite("left part" , ans);
- imwrite("images/final.jpg" , ans);
+ imwrite("images/final.png" , ans);
  return ans;
 }

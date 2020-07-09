@@ -29,9 +29,12 @@ def fit():
     return {'error': 'must have a shirt image'}, 400
 
   try:
-    print("hi0")
     person_image = Image.open(request.files['person_image'].stream)
+    person_image.save("temp1.png")
+    person_image = Image.open("temp1.png")
     shirt_image = Image.open(request.files['shirt_image'].stream)
+    shirt_image.save("temp2.png")
+    shirt_image = Image.open("temp2.png")
     if(person_image.format not in ['JPG', 'JPEG', 'PNG']):
       return {'error': 'image must be jpg, jpeg or png'}, 400
 
@@ -61,13 +64,13 @@ def fit():
         return {'error': 'face not properly recognized. choose a photo with an upfront person.'}, 400
 
     #print("hi5.5")
-    result = send_file("./images/final.jpg", mimetype='image/jpg')
+    result = send_file("./images/final.png", mimetype='image/png')
 
     #print("hi6")
     return result
 
   except Exception:
-    return {'error': 'can not load your image files. check your image files'}, 400
+    return {'error': 'cannot load your image files. check your image files'}, 400
 
 @app.errorhandler(413)
 def request_entity_too_large(error):
